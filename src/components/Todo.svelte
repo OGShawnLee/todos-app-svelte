@@ -2,7 +2,7 @@
   import Switch from './Switch.svelte';
   import { Dialog, DialogDescription, DialogTitle } from 'malachite-ui/components';
   import { fade, scale, slide } from 'svelte/transition';
-  import { inputElement, todos } from '../state';
+  import { inputElement, settings, todos } from '../state';
   import { quadOut } from 'svelte/easing';
 
   export let isCompleted: boolean;
@@ -23,7 +23,10 @@
   </h3>
   <button
     class="group ml-auto h-8 w-8 min-w-8 | dark:(bg-slate-800 text-slate-600 hover:bg-slate-700 focus:bg-slate-700) bg-slate-100 text-slate-200 hover:bg-slate-200 focus:bg-slate-200 rounded-full transition duration-300 ease-out"
-    on:click={() => (open = true)}>
+    on:click={() => {
+      if ($settings.askBeforeTodoDeletion) return (open = true);
+      todos.delete(id);
+    }}>
     <span class="sr-only"> Delete Todo </span>
     <i
       class="bx bx-x text-2xl 

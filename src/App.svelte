@@ -6,8 +6,9 @@
     Form,
     ThemeSwitch,
     Todo as TodoComponent,
+    Settings,
   } from './components';
-  import { todos } from './state';
+  import { settings, todos } from './state';
   import { slide } from 'svelte/transition';
   import { quadOut } from 'svelte/easing';
 
@@ -16,13 +17,24 @@
   $: completedLength = $todos.length - $left;
 
   let open = false;
+  let openSettings = false;
 </script>
 
 <BackgroundImage />
 
+<Settings bind:open={openSettings} />
+
 <header class="max-w-xs mx-auto py-12 | flex items-center justify-between | sm:max-w-xl">
   <h1 class="uppercase text-3xl text-white font-bold tracking-[0.35em] | lg:text-4xl">Todo</h1>
-  <ThemeSwitch />
+  <div class="flex items-center gap-6">
+    <button
+      class="flex items-center justify-center"
+      on:click={() => (openSettings = !openSettings)}>
+      <span class="sr-only"> Open Settings </span>
+      <i class="bx bxs-cog text-white text-3xl" />
+    </button>
+    <ThemeSwitch />
+  </div>
 </header>
 
 <main class="max-w-xs mx-auto | sm:max-w-xl">
@@ -57,7 +69,9 @@
       <button
         class="<sm:text-sm xl:text-lg transition duration-300 ease-out hover:(dark:text-white text-black) focus:(dark:text-white text-black)"
         on:click={() => {
-          if (completedLength > 0) open = true;
+          if (completedLength <= 0) return;
+          if ($settings.askBeforeAllCompletedDeletion) return (open = true);
+          todos.clear();
         }}>
         Clear Completed
 

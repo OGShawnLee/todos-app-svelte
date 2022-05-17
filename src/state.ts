@@ -1,7 +1,15 @@
 import { writable } from 'svelte/store';
-import { useDarkMode, useTodos } from './lib';
+import { useDarkMode, useSettings, useTodos } from './lib';
 
 export const inputElement = writable<HTMLElement | undefined>();
+
+export const settings = useSettings(
+  {
+    askBeforeAllCompletedDeletion: true,
+    askBeforeTodoDeletion: true,
+  },
+  'TODO-APP-OG-SETTINGS-KEY'
+);
 
 export const theme = useDarkMode('DARK', 'TODO-APP-OG-THEME-KEY');
 

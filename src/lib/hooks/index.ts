@@ -53,6 +53,31 @@ function setLightMode() {
   document.documentElement.classList.remove('dark');
 }
 
+export function useSettings(initialValue: Settings, localStorageKey: string) {
+  const Settings: Writable<Settings> = writable(initialValue, (set) => {
+    const value = localStorage.getItem(localStorageKey);
+    if (value) {
+      const parsed = JSON.parse(value);
+      if (isSettingsObject(parsed)) set(parsed);
+    }
+    return Settings.subscribe((settings) => {
+      localStorage.setItem(localStorageKey, JSON.stringify(settings));
+    });
+  });
+  return {
+    ...Settings,
+    reset: () => Settings.set(initialValue),
+  };
+}
+
+function isSettingsObject(val: unknown): val is Settings {
+  return (
+    isObject(val, ['askBeforeTodoDeletion', 'askBeforeCompletedDeletion']) &&
+    isBoolean(val.askBeforeTodoDeletion) &&
+    isBoolean(val.askBeforeTodoDeletion)
+  );
+}
+
 export function useTodos(initialValue: Todo[], localStorageKey: string) {
   const Todos: Writable<Todo[]> = writable<Todo[]>([], (set) => {
     const value = localStorage.getItem(localStorageKey);
