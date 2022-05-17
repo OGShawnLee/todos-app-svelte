@@ -28,7 +28,7 @@
   <h1 class="uppercase text-3xl text-white font-bold tracking-[0.35em] | lg:text-4xl">Todo</h1>
   <div class="flex items-center gap-6">
     <button
-      class="flex items-center justify-center"
+      class="flex items-center justify-center transform transition duration-300 focus:scale-125 hover:scale-125"
       on:click={() => (openSettings = !openSettings)}>
       <span class="sr-only"> Open Settings </span>
       <i class="bx bxs-cog text-white text-3xl" />

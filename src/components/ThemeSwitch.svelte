@@ -7,7 +7,10 @@
   const { isDarkMode } = theme;
 </script>
 
-<Switch class="relative h-8 w-8 min-w-8" checked={$isDarkMode} on:click={theme.toggle}>
+<Switch
+  class="relative h-8 w-8 min-w-8 transform transition duration-300 focus:scale-125 hover:scale-125"
+  checked={$isDarkMode}
+  on:click={theme.toggle}>
   <SwitchLabel class="sr-only">Toggle Dark Mode</SwitchLabel>
   {#key $isDarkMode}
     <img
