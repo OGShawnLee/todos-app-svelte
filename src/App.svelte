@@ -1,31 +1,13 @@
 <script lang="ts">
-  import { bgMobileDark, bgDesktopDark, bgDesktopLight, bgMobileLight } from './assets';
-  import { Filter, Form, ThemeSwitch, Todo as TodoComponent } from './components';
-  import { theme, todos } from './state';
-  import { fade, slide } from 'svelte/transition';
+  import { BackgroundImage, Filter, Form, ThemeSwitch, Todo as TodoComponent } from './components';
+  import { todos } from './state';
+  import { slide } from 'svelte/transition';
   import { quadOut } from 'svelte/easing';
 
   const { filtered, left } = todos;
-  const { isDarkMode } = theme;
-
-  $: bgDesktop = $isDarkMode ? bgDesktopDark : bgDesktopLight;
-  $: bgMobile = $isDarkMode ? bgMobileDark : bgMobileLight;
 </script>
 
-{#key $isDarkMode}
-  <picture
-    class="fixed top-0 left-0 right-0 -z-10 h-[200px] | block | sm:h-[300px]"
-    aria-hidden="true">
-    <source media="(max-width: 375px)" srcset={bgMobile} sizes="375x200" />
-    <source media="(min-width: 375px)" srcset={bgDesktop} sizes="1400x300" />
-    <img
-      class="h-full w-full object-center object-cover"
-      src={bgMobile}
-      sizes="375x200"
-      alt=""
-      transition:fade />
-  </picture>
-{/key}
+<BackgroundImage />
 
 <header class="max-w-xs mx-auto py-12 | flex items-center justify-between | sm:max-w-xl">
   <h1 class="uppercase text-3xl text-white font-bold tracking-[0.35em] | lg:text-4xl">Todo</h1>

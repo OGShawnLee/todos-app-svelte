@@ -1,3 +1,4 @@
+export { default as BackgroundImage } from './BackgroundImage.svelte';
 export { default as Filter } from './Filter.svelte';
 export { default as Form } from './Form.svelte';
 export { default as ThemeSwitch } from './ThemeSwitch.svelte';
