@@ -3,6 +3,56 @@ import { derived, writable } from 'svelte/store';
 import { isArray, isBoolean, isEmpty, isNumber, isObject, isString } from 'malachite-ui/predicate';
 import { makeReadable } from 'malachite-ui/utils';
 
+export function useDarkMode(initialValue: ColorTheme, localStorageKey: string) {
+  const Theme: Writable<ColorTheme> = writable(initialValue, (set) => {
+    const value = localStorage.getItem(localStorageKey) as ColorTheme | null;
+
+    const setColorTheme = {
+      DARK() {
+        set('DARK');
+        setDarkMode();
+      },
+      LIGHT() {
+        set('LIGHT');
+        setLightMode();
+      },
+    };
+
+    if (value === 'DARK' || value === 'LIGHT') setColorTheme[value]();
+    else if (preffersDarkMode()) setColorTheme.DARK();
+
+    return Theme.subscribe((mode) => {
+      localStorage.setItem(localStorageKey, mode);
+      setColorTheme[mode]();
+    });
+  });
+
+  return {
+    subscribe: Theme.subscribe,
+    isDarkMode: derived(Theme, (theme) => theme === 'DARK'),
+    set: Theme.set,
+    toggle: () => {
+      Theme.update((colorTheme) => (colorTheme === 'DARK' ? 'LIGHT' : 'DARK'));
+    },
+  };
+}
+
+function preffersDarkMode() {
+  document.documentElement.classList.add('dark');
+  document.documentElement.classList.remove('light');
+  return window.matchMedia('(prefers-color-scheme:dark)').matches ? 'DARK' : 'LIGHT';
+}
+
+function setDarkMode() {
+  document.documentElement.classList.add('dark');
+  document.documentElement.classList.remove('light');
+}
+
+function setLightMode() {
+  document.documentElement.classList.add('light');
+  document.documentElement.classList.remove('dark');
+}
+
 export function useTodos(initialValue: Todo[], localStorageKey: string) {
   const Todos: Writable<Todo[]> = writable<Todo[]>([], (set) => {
     const value = localStorage.getItem(localStorageKey);

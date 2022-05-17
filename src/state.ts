@@ -1,7 +1,9 @@
 import { writable } from 'svelte/store';
-import { useTodos } from './lib';
+import { useDarkMode, useTodos } from './lib';
 
 export const inputElement = writable<HTMLElement | undefined>();
+
+export const theme = useDarkMode('DARK', 'TODO-APP-OG-THEME-KEY');
 
 export const todos = useTodos(
   [

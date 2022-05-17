@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite-plugin-windicss';
 
 export default defineConfig({
+  darkMode: 'class',
   theme: {
     colors: {
+      black: 'hsl(0, %0, %0)',
       blue: 'hsl(220, 98%, 61%)',
       cyan: 'hsl(192, 100%, 67%)',
       pink: 'hsl(280, 87%, 65%)',

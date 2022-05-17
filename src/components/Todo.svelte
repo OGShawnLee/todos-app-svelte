@@ -22,10 +22,14 @@
     {value}
   </h3>
   <button
-    class="group ml-auto h-8 w-8 min-w-8 | bg-slate-800 text-slate-600 rounded-full transition duration-300 ease-out hover:bg-slate-700 focus:bg-slate-700"
+    class="group ml-auto h-8 w-8 min-w-8 | dark:(bg-slate-800 text-slate-600 hover:bg-slate-700 focus:bg-slate-700) bg-slate-100 text-slate-200 hover:bg-slate-200 focus:bg-slate-200 rounded-full transition duration-300 ease-out"
     on:click={() => (open = true)}>
     <span class="sr-only"> Delete Todo </span>
-    <i class="bx bx-x text-2xl group-hover:text-cyan group-focus:text-cyan" />
+    <i
+      class="bx bx-x text-2xl 
+      dark:(group-hover:text-cyan group-focus:text-cyan) group-hover:text-slate-500 group-focus:text-slate-500
+
+      " />
   </button>
 </article>
 
@@ -35,33 +39,32 @@
   let:close
   let:overlay
   let:content>
-  <div
-    class="fixed inset-0 | bg-slate-900/70 backdrop-filter backdrop-blur-[1px]"
-    use:overlay
-    transition:fade />
+  <div class="fixed inset-0 | bg-slate-900/70" use:overlay transition:fade />
 
   <div
-    class="max-w-xs p-8 z-10 | bg-slate-800 rounded-md | sm:max-w-lg"
+    class="max-w-xs p-8 z-10 | dark:bg-slate-800 bg-slate-100 rounded-md | sm:max-w-lg"
     use:content
     transition:scale={{ duration: 300, start: 0.75, easing: quadOut }}>
-    <DialogTitle class="text-white font-bold sm:text-lg">
+    <DialogTitle class="dark:text-white text-black font-bold sm:text-lg">
       Delete "{value}"?
     </DialogTitle>
     <DialogDescription class="text-sm">
-      Do you want to delete this <b class="text-slate-100">
+      Do you want to delete this <b class="dark:text-slate-100">
         {isCompleted ? 'completed' : 'incompleted'}
       </b>
       todo? This action will be
-      <strong class="text-slate-100"> irreversible </strong>.
+      <strong class="dark:text-slate-100"> irreversible </strong>.
     </DialogDescription>
     <div class="mt-6 | flex items-center gap-6">
       <button
-        class="px-6 py-2 | border-2 border-transparent rounded-md transition-colors duration-300 ease-out focus:(text-cyan border-cyan) hover:text-pink"
+        class="px-6 py-2 | border-2 border-transparent rounded-md transition-colors duration-300 ease-out 
+        dark:focus:(text-cyan border-cyan) dark:hover:text-cyan focus:border-slate-900"
         on:click={close}>
         Cancel
       </button>
       <button
-        class="px-6 py-2 | border-2 border-transparent rounded-md transition-colors duration-300 ease-out focus:(text-pink border-pink) hover:text-pink"
+        class="px-6 py-2 | border-2 border-transparent rounded-md transition-colors duration-300 ease-out 
+        dark:focus:(text-pink border-pink) dark:hover:text-pink focus:border-slate-900"
         on:click={() => {
           close($inputElement);
           todos.delete(id);

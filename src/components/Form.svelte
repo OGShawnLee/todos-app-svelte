@@ -17,7 +17,7 @@
   }
 </script>
 
-<section class="h-14 px-6 {className} | bg-slate-800 rounded-md shadow-lg">
+<section class="h-14 px-6 {className} | dark:bg-slate-800 bg-slate-100 rounded-md shadow-lg">
   <h2 class="sr-only">New Todo</h2>
   <form class="h-full | flex items-center gap-3" on:submit|preventDefault={add}>
     <Switch bind:isCompleted />
@@ -33,13 +33,21 @@
   </form>
 </section>
 
-<style>
+<style global>
   /* Change autocomplete styles in WebKit */
-  input:-webkit-autofill,
+  html.dark input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
     -webkit-text-fill-color: white;
     -webkit-box-shadow: 0 0 0px 1000px hsl(235, 24%, 19%) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  html.light input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px hsl(236, 33%, 92%) inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 </style>

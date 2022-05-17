@@ -18,7 +18,7 @@
     base: '<sm:text-sm xl:text-base text-slate-600 font-bold transition duration-300 ease-out',
     selected: {
       on: 'text-blue transform focus:text-cyan',
-      off: 'hover:text-white focus:text-white',
+      off: 'dark:(hover:text-white focus:text-white) hover:text-black focus:text-black',
     },
   });
 </script>
