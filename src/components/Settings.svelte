@@ -43,7 +43,9 @@
             <img src={iconCheck} alt="" transition:fade />
           {/if}
         </Switch>
-        <SwitchLabel class="<sm:text-sm">Confirm All Completed Todos Deletion</SwitchLabel>
+        <SwitchLabel as="span" class="<sm:text-sm">
+          Confirm All Completed Todos Deletion
+        </SwitchLabel>
       </SwitchGroup>
       <SwitchGroup as="div" class="flex items-center gap-3" let:isChecked>
         <Switch
@@ -59,7 +61,7 @@
             <img src={iconCheck} alt="" transition:fade />
           {/if}
         </Switch>
-        <SwitchLabel class="<sm:text-sm">Confirm Todo Deletion</SwitchLabel>
+        <SwitchLabel as="span" class="<sm:text-sm">Confirm Todo Deletion</SwitchLabel>
       </SwitchGroup>
     </div>
 

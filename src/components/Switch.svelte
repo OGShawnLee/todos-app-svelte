@@ -16,7 +16,7 @@
     },
   }}
   on:click>
-  <SwitchLabel class="sr-only">
+  <SwitchLabel as="span" class="sr-only">
     <slot>Toggle Todo Completed State</slot>
   </SwitchLabel>
   {#if isCompleted}
