@@ -28,7 +28,6 @@
       class="h-full w-full | bg-transparent xl:text-lg caret-blue"
       placeholder="Create a new todo..."
       id="todo-input"
-      autocomplete="false"
       bind:value />
   </form>
 </section>
