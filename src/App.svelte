@@ -1,10 +1,21 @@
 <script lang="ts">
-  import { BackgroundImage, Filter, Form, ThemeSwitch, Todo as TodoComponent } from './components';
+  import {
+    BackgroundImage,
+    DeleteCompletedDialog,
+    Filter,
+    Form,
+    ThemeSwitch,
+    Todo as TodoComponent,
+  } from './components';
   import { todos } from './state';
   import { slide } from 'svelte/transition';
   import { quadOut } from 'svelte/easing';
 
   const { filtered, left } = todos;
+
+  $: completedLength = $todos.length - $left;
+
+  let open = false;
 </script>
 
 <BackgroundImage />
@@ -45,8 +56,12 @@
 
       <button
         class="<sm:text-sm xl:text-lg transition duration-300 ease-out hover:(dark:text-white text-black) focus:(dark:text-white text-black)"
-        on:click={todos.clear}>
+        on:click={() => {
+          if (completedLength > 0) open = true;
+        }}>
         Clear Completed
+
+        <DeleteCompletedDialog bind:open length={completedLength} />
       </button>
     </div>
   </section>
