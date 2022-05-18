@@ -72,8 +72,8 @@ export function useSettings(initialValue: Settings, localStorageKey: string) {
 
 function isSettingsObject(val: unknown): val is Settings {
   return (
-    isObject(val, ['askBeforeTodoDeletion', 'askBeforeCompletedDeletion']) &&
-    isBoolean(val.askBeforeTodoDeletion) &&
+    isObject(val, ['askBeforeAllCompletedDeletion', 'askBeforeTodoDeletion']) &&
+    isBoolean(val.askBeforeAllCompletedDeletion) &&
     isBoolean(val.askBeforeTodoDeletion)
   );
 }
