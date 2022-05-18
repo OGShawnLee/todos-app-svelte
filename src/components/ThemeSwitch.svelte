@@ -15,8 +15,8 @@
   {#key $isDarkMode}
     <img
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      src={$isDarkMode ? iconMoon : iconSun}
-      alt={$isDarkMode ? 'Dark Mode' : 'Light Mode'}
+      src={$isDarkMode ? iconSun : iconMoon}
+      alt={$isDarkMode ? 'Light Mode' : 'Dark Mode'}
       transition:fade />
   {/key}
 </Switch>
